@@ -9,15 +9,18 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
         }
         
         body {
-            background: #0f0c29;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: white;
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .stars {
@@ -43,58 +46,97 @@
         }
         
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 40px;
+            background: rgba(15, 12, 41, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         h1 {
             text-align: center;
             margin-bottom: 30px;
-            font-size: 2.5rem;
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #c2e9fb, #a1c4fd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
         }
         
         .upload-area {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
             padding: 30px;
             text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             margin-bottom: 30px;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
         
         .upload-area:hover {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.08);
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
         
         #dropZone {
-            border: 2px dashed rgba(255, 255, 255, 0.5);
-            border-radius: 10px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
             padding: 60px 20px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
         
         #dropZone:hover {
-            border-color: white;
+            border-color: #a1c4fd;
             background: rgba(255, 255, 255, 0.05);
+        }
+        
+        #dropZone::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #12c2e9, #c471ed, #f64f59);
+            background-size: 400% 400%;
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0;
+            transition: opacity 0.4s;
+            animation: gradient 15s ease infinite;
+        }
+        
+        #dropZone:hover::before {
+            opacity: 0.15;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
         #dropZone p {
             font-size: 1.2rem;
             margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.8);
         }
         
         #dropZone i {
-            font-size: 3rem;
-            margin-bottom: 15px;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
             display: block;
+            color: #a1c4fd;
         }
         
         #fileInput {
@@ -105,7 +147,7 @@
             background: linear-gradient(135deg, #6e8efb, #a777e3);
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 14px 32px;
             border-radius: 50px;
             font-size: 1rem;
             cursor: pointer;
@@ -114,12 +156,32 @@
             margin-top: 20px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-weight: bold;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(110, 142, 251, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0.1), rgba(255,255,255,0.4), rgba(255,255,255,0.1));
+            transform: translateX(-100%);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            10% { transform: translateX(100%); }
+            100% { transform: translateX(100%); }
         }
         
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(110, 142, 251, 0.4);
+            box-shadow: 0 7px 20px rgba(110, 142, 251, 0.6);
         }
         
         .btn:active {
@@ -137,48 +199,87 @@
         #imagePreview {
             max-width: 300px;
             max-height: 300px;
-            border-radius: 10px;
+            border-radius: 15px;
             display: none;
-            border: 4px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border: 4px solid rgba(161, 196, 253, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        #imagePreview:hover {
+            transform: scale(1.02);
+            border-color: rgba(161, 196, 253, 0.5);
         }
         
         .result-container {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.07);
             border-radius: 15px;
-            padding: 30px;
+            padding: 35px;
             text-align: center;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             display: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .result-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, rgba(161, 196, 253, 0.1), transparent 30%);
+            animation: rotate 8s linear infinite;
+        }
+        
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
         }
         
         .result-container h2 {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-size: 2rem;
-            color: #ffffff;
+            color: #a1c4fd;
+            position: relative;
+        }
+        
+        .result-container h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+            border-radius: 3px;
         }
         
         .result-text {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
+            font-size: 2.5rem;
             font-weight: bold;
-        }
-        
-        .confidence {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
+            background: linear-gradient(to right, #c2e9fb, #a1c4fd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
         
         .loader {
             display: none;
-            width: 48px;
-            height: 48px;
-            border: 5px solid rgba(255, 255, 255, 0.3);
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(161, 196, 253, 0.3);
             border-radius: 50%;
-            border-top-color: white;
+            border-top-color: #a1c4fd;
             animation: spin 1s linear infinite;
             margin: 20px auto;
+            box-shadow: 0 0 15px rgba(161, 196, 253, 0.5);
         }
         
         @keyframes spin {
@@ -188,10 +289,12 @@
         .error-message {
             color: #ff6b6b;
             margin-top: 15px;
-            padding: 10px;
-            border-radius: 5px;
+            padding: 15px;
+            border-radius: 10px;
             background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
             display: none;
+            font-weight: 500;
         }
     </style>
 </head>
@@ -203,10 +306,10 @@
         
         <div class="upload-area">
             <div id="dropZone">
-                <i>📷</i>
+                <i>👟</i>
                 <p>Drag & Drop an image or click to browse</p>
                 <input type="file" id="fileInput" accept="image/*">
-                <button class="btn" id="browseBtn">Browse Files</button>
+                <button class="btn" id="browseBtn">Select Image</button>
             </div>
         </div>
         
@@ -219,7 +322,6 @@
         <div class="result-container" id="resultContainer">
             <h2>Classification Result</h2>
             <div class="result-text" id="resultText">-</div>
-            <div class="confidence" id="confidenceText">-</div>
         </div>
     </div>
 
@@ -227,7 +329,7 @@
         // Create stars
         function createStars() {
             const stars = document.getElementById('stars');
-            const count = 200;
+            const count = 250;
             
             for (let i = 0; i < count; i++) {
                 const star = document.createElement('div');
@@ -238,7 +340,7 @@
                 const y = Math.random() * window.innerHeight;
                 
                 // Random size
-                const size = Math.random() * 2;
+                const size = Math.random() * 2.5;
                 
                 // Random animation delay
                 const delay = Math.random() * 5;
@@ -264,7 +366,6 @@
             const loader = document.getElementById('loader');
             const resultContainer = document.getElementById('resultContainer');
             const resultText = document.getElementById('resultText');
-            const confidenceText = document.getElementById('confidenceText');
             const errorMessage = document.getElementById('errorMessage');
             
             // Click on browse button
@@ -278,18 +379,18 @@
             // Handle drag and drop
             dropZone.addEventListener('dragover', function(e) {
                 e.preventDefault();
-                dropZone.style.borderColor = 'white';
+                dropZone.style.borderColor = '#a1c4fd';
                 dropZone.style.background = 'rgba(255, 255, 255, 0.1)';
             });
             
             dropZone.addEventListener('dragleave', function() {
-                dropZone.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+                dropZone.style.borderColor = 'rgba(255, 255, 255, 0.3)';
                 dropZone.style.background = '';
             });
             
             dropZone.addEventListener('drop', function(e) {
                 e.preventDefault();
-                dropZone.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+                dropZone.style.borderColor = 'rgba(255, 255, 255, 0.3)';
                 dropZone.style.background = '';
                 
                 if (e.dataTransfer.files.length) {
@@ -356,10 +457,6 @@
                     // Display result
                     resultContainer.style.display = 'block';
                     resultText.textContent = data.result.toUpperCase();
-                    
-                    // Format confidence as percentage
-                    const confidencePercent = (data.confidence * 100).toFixed(2);
-                    confidenceText.textContent = `Confidence: ${confidencePercent}%`;
                     
                     // Scroll to result
                     resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
